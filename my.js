@@ -366,3 +366,5 @@ async function doIt() {
 }
 
 doIt();
+
+console.log(typeof use)

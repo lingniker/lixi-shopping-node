@@ -23,6 +23,11 @@
 import Database from '@ioc:Adonis/Lucid/Database'
 import Route from '@ioc:Adonis/Core/Route'
 
+import 'App/Routes/v1'
+import 'App/Routes/login'
+import 'App/Routes/user'
+import 'App/Routes/administrator'
+
 // const { connection } = Database.manager.get('mysql')
 
 Route.get('/', async () => {

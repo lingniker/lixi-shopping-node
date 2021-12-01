@@ -1,21 +1,22 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
-import User from 'App/Models/User'
 
-export default class UserSeeder extends BaseSeeder {
+import Administrator from 'App/Models/Administrator'
+
+export default class AdministratorSeeder extends BaseSeeder {
   public async run () {
     // Write your database queries inside the run method
-    await User.createMany([
+    await Administrator.createMany([
       {
-        'user_name': 'ling1',
-        'nick_name': 'niker1',
+        'user_name': 'admin',
+        'nick_name': 'admin',
         'mobile': '1231',
         'email': 'outlook1',
         'avatar': '--',
         'password': '123456'
       },
       {
-        'user_name': 'ling',
-        'nick_name': 'niker',
+        'user_name': 'admin1',
+        'nick_name': 'admin1',
         'mobile': '123',
         'email': 'outlook',
         'avatar': '--',
