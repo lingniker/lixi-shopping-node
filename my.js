@@ -368,3 +368,35 @@ async function doIt() {
 doIt();
 
 console.log(typeof use)
+
+var a = {
+  "url":"/user",
+  "query":"pageNum=1&pageSize=10",
+  "body":{
+    "pageNum":"1",
+    "pageSize":"10"
+  },
+  "params":{},
+  "headers":{
+    "host":"127.0.0.1:8035",
+    "connection":"keep-alive",
+    "sec-ch-ua":"\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Google Chrome\";v=\"96\"",
+    "accept":"application/json",
+    "sec-ch-ua-mobile":"?0",
+    "user-agent":"Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36",
+    "sec-ch-ua-platform":"\"Windows\"",
+    "origin":"http://localhost:8033",
+    "sec-fetch-site":"cross-site",
+    "sec-fetch-mode":"cors",
+    "sec-fetch-dest":"empty",
+    "referer":"http://localhost:8033/",
+    "accept-encoding":"gzip, deflate, br",
+    "accept-language":"zh-CN,zh;q=0.9"
+  },
+  "method":"GET",
+  "protocol":"http",
+  "cookies":{},
+  "hostname":"127.0.0.1",
+  "ip":"127.0.0.1",
+  "subdomains":{}
+}

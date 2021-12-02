@@ -1,11 +1,10 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Administrator from 'App/Models/Administrator'
+import LoginLog from 'App/Models/LoginLog'
 
-
-export default class AdministratorsController {
-  async getList () {
-    var users =  await Administrator.all()
+export default class LoginLogsController {
+  async getList ({ request, response }) {
+    var users = await LoginLog.all()
     return {
       code: '1',
       massage: '成功',
