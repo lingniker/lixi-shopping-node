@@ -8,6 +8,7 @@
 import Env from '@ioc:Adonis/Core/Env'
 import { DriveConfig } from '@ioc:Adonis/Core/Drive'
 import Application from '@ioc:Adonis/Core/Application'
+import path from 'path'
 
 /*
 |--------------------------------------------------------------------------
@@ -53,7 +54,7 @@ const driveConfig: DriveConfig = {
       | files.
       |
       */
-      root: Application.tmpPath('uploads'),
+      root: path.join(__dirname,'../public/img')
 
       /*
       |--------------------------------------------------------------------------

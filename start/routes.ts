@@ -28,6 +28,8 @@ import 'App/Routes/login'
 import 'App/Routes/login-log'
 import 'App/Routes/user'
 import 'App/Routes/administrator'
+import 'App/Routes/img-uplosd'
+
 
 // const { connection } = Database.manager.get('mysql')
 
