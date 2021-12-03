@@ -9,14 +9,15 @@ export default class LoginLog {
     // code for middleware goes here. ABOVE THE NEXT CALL
     await next()
     var requestJosn = JSON.parse(JSON.stringify(request))
+    var query = requestJosn.method === 'POST' ? JSON.stringify(requestJosn.body) : requestJosn.query
     var obj = {}
     obj.user_name = requestJosn.body.user_name
     obj.ip = requestJosn.ip
     obj.login_massage = request.obj.massage
     obj.login_type = request.login_type
     obj.browser_type = getBrowserType(requestJosn.headers['user-agent'])
-    obj.system = getSystem(requestJosn.headers['user-agent'])
-    obj.query = requestJosn.query
+    obj.system = getSystem(requestJosn.headers['user-agent']) ? getSystem(requestJosn.headers['user-agent']) : '--'
+    obj.query = query
     await LoginLog.create(obj)
   }
 }

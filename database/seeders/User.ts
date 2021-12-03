@@ -10,16 +10,23 @@ export default class UserSeeder extends BaseSeeder {
         'nick_name': 'niker1',
         'mobile': '1231',
         'email': 'outlook1',
-        'avatar': '--',
-        'password': '123456'
+        'avatar': 'ckwovbq2o00016ctoa5nt2nlq.jpg',
+        'password': '123456',
+        'money': '100000',
+        'address_name': '深圳',
+        'address_id': '1',
+
       },
       {
         'user_name': 'ling',
         'nick_name': 'niker',
         'mobile': '123',
         'email': 'outlook',
-        'avatar': '--',
-        'password': '123456'
+        'avatar': 'ckwovbq2o00016ctoa5nt2nlq.jpg',
+        'password': '123456',
+        'money': '100000',
+        'address_name': '深圳',
+        'address_id': '1',
       }
     ])
   }

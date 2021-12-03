@@ -1,13 +1,14 @@
 // import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import Order from 'App/Models/Order'
-export default class OrdersController {
+import OperLog from 'App/Models/OperLog'
+
+export default class OperLogsController {
   async getList ({ request, response }) {
-    var orders = await Order.all()
+    var operLogs = await OperLog.all()
     return {
       code: '1',
       massage: '成功',
-      data: orders.map((order) => order.toJSON())
+      data: operLogs.map((operLog) => operLog.toJSON())
     }
   }
 }

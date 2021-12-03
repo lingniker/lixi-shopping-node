@@ -31,6 +31,8 @@ import 'App/Routes/administrator'
 import 'App/Routes/img-uplosd'
 import 'App/Routes/shop'
 import 'App/Routes/address'
+import 'App/Routes/order'
+import 'App/Routes/oper-log'
 
 
 // const { connection } = Database.manager.get('mysql')

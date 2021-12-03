@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
-export default class User extends BaseModel {
+export default class OperLog extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
@@ -9,28 +9,25 @@ export default class User extends BaseModel {
   public user_name: string
 
   @column()
-  public nick_name: string
+  public ip: string
 
   @column()
-  public mobile: string
+  public oper_massage: string
 
   @column()
-  public email: string
+  public login_type: string
 
   @column()
-  public avatar: string
+  public browser_type: string
 
   @column()
-  public password: string
+  public system: string
 
   @column()
-  public money: string
+  public query: string
 
   @column()
-  public address_name: string
-
-  @column()
-  public address_id: string
+  public response: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

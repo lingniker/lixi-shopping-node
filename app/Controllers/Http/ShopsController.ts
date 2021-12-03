@@ -8,7 +8,12 @@ export default class ShopsController {
     return {
       code: '1',
       massage: '成功',
-      data: shops.map((shop) => shop.toJSON())
+      data: {
+        row: shops.map((shop) => shop.toJSON())
+        total: 100,
+        page: 1,
+        page_size: 10
+      }
     }
   }
 }
