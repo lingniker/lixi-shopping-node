@@ -24,10 +24,16 @@ export default class Shop extends BaseModel {
   public sales_status: string
 
   @column()
-  public sales_status_describe: string
+  public sales_status_label: string
 
   @column()
-  public price: number
+  public price: string
+
+  @column()
+  public address_name: string
+
+  @column()
+  public address_id: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

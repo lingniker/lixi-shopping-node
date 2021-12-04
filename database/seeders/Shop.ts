@@ -14,8 +14,10 @@ export default class ShopSeeder extends BaseSeeder {
         'stock': '100',
         'sales_volume': '9',
         'sales_status': '1',
-        'sales_status_describe': '在售',
+        'sales_status_label': '在售',
         'price': '80',
+        'address_name': '深圳',
+        'address_id': '1'
       },
       {
         'shop_name': '美食2',
@@ -24,8 +26,10 @@ export default class ShopSeeder extends BaseSeeder {
         'stock': '100',
         'sales_volume': '9',
         'sales_status': '1',
-        'sales_status_describe': '在售',
+        'sales_status_label': '在售',
         'price': '80',
+        'address_name': '深圳',
+        'address_id': '1'
       }
     ])
 

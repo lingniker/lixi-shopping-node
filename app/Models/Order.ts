@@ -24,6 +24,9 @@ export default class Order extends BaseModel {
   public shop_name: string
 
   @column()
+  public shop_img_path: string
+
+  @column()
   public shop_address_name: string
 
   @column()
