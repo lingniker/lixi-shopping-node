@@ -4,3 +4,4 @@ Route.get('/shop', "ShopsController.getList")
 Route.post('/shop', "ShopsController.getList");
 
 Route.post('/shop/create', "ShopsController.create");
+Route.post('/shop/update', "ShopsController.update");

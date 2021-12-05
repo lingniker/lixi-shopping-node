@@ -3,16 +3,22 @@
 import Shop from 'App/Models/Shop'
 export default class ShopsController {
   async getList ({ request, response }) {
-    var shops = await Shop.all()
+    var query = request.all()
+    var shops = null;
+    var total = 0;
+    if (query.shop_name) {
+      shops = await Shop.query().where('shop_name', 'LIKE', '%'+query.shop_name+'%').paginate(1,10)
+      total = shops.length;
+    } else {
+      // var shops1 = await Shop.query()
+      // total = shops1.length;
+      shops = await Shop.query().paginate(1,10)
+      // shops
+    }
     return {
       code: '1',
       massage: '成功',
-      data: {
-        row: shops.map((shop) => shop.toJSON())
-        total: 100,
-        page: 1,
-        page_size: 10
-      }
+      data: shops
     }
   }
 
@@ -23,6 +29,16 @@ export default class ShopsController {
       code: '1',
       massage: '创建成功',
       data: shop
+    }
+  }
+
+  async update ({ request, response }) {
+    var query = request.all()
+    // var shop = await Shop.create(query)
+    return {
+      code: '1',
+      massage: '修改成功',
+      // data: shop
     }
   }
 }
