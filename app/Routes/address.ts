@@ -1,4 +1,4 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/address', "AddressesController.getList")
-Route.post('/address', "AddressesController.getList");
+Route.get('/api/address', "AddressesController.getList")
+Route.post('/api/address', "AddressesController.getList");
