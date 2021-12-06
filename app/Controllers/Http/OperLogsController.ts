@@ -4,11 +4,26 @@ import OperLog from 'App/Models/OperLog'
 
 export default class OperLogsController {
   async getList ({ request, response }) {
-    var operLogs = await OperLog.all()
-    return {
-      code: '1',
-      massage: '成功',
-      data: operLogs.map((operLog) => operLog.toJSON())
+    // var operLogs = await OperLog.all()
+    // return {
+    //   code: '1',
+    //   massage: '成功',
+    //   data: operLogs.map((operLog) => operLog.toJSON())
+    // }
+    var query = request.all()
+    var operLogs = null;
+    var total = 0;
+    if (query._user_name) {
+      operLogs = await OperLog.query().where('user_name', 'LIKE', '%'+query._user_name+'%').orderBy('id', 'asc').paginate(query.current_page, 10)
+      total = operLogs.length;
+    } else {
+      operLogs = await OperLog.query().orderBy('id', 'asc').paginate(query.current_page ? query.current_page : 1, 10)
     }
+    var obj = {
+      code: '1',
+      massage: '获取操作日记成功',
+      data: operLogs
+    }
+    return obj
   }
 }

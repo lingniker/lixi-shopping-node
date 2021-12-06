@@ -53,6 +53,8 @@ export var getSystem = function(ua) {
     if (ua.match(/OS 4_[0-9_]+ like Mac OS X/i)) {
       return "iOS4";
     }
+
+    return "--"
     
 }
 
@@ -81,6 +83,8 @@ export var getBrowserType = function(ua) { // 判断浏览器类型
   if (ua.indexOf("Safari") !== -1) {
     return "Safari";
   }
+
+  return '--'
 }
 
 export default {

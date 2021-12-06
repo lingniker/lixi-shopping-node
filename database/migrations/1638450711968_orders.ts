@@ -10,7 +10,6 @@ export default class Orders extends BaseSchema {
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
-      
       table.string('user_id', 80).notNullable()
       table.string('user_name', 80).notNullable()
       table.string('user_address_id', 80).notNullable()
@@ -24,8 +23,8 @@ export default class Orders extends BaseSchema {
       table.string('shop_price_total', 80).notNullable()
       table.string('order_status', 80).notNullable() // 1待付款 2已付款 
       table.string('order_label', 80).notNullable() // 1待付款 2已付款 
-      table.string('send_status', 80).notNullable() // 1待发货 2待收货 3完成 
-      table.string('send_label', 80).notNullable() // 1待发货 2待收货 3完成 
+      table.string('send_status', 80).notNullable() // 1待付款 2待发货 3待收货 4完成 
+      table.string('send_label', 80).notNullable() // 1待付款 2待发货 3待收货 4完成 
 
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })

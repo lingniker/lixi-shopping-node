@@ -42,4 +42,5 @@ Server.middleware.register([
 */
 Server.middleware.registerNamed({
   LoginLog: () => import('App/Middleware/LoginLog')
+  OperLog: () => import('App/Middleware/OperLog')
 })

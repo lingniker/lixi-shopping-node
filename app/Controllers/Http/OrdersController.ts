@@ -7,39 +7,53 @@ export default class OrdersController {
   async getList ({ request, response }) {
     var query = request.all()
     var data = []
-    if (query.user_id) {
-      // data = await Order.findBy('user_id', query.user_id)
+    if (query._user_id) {
       data = await Order.query()
-      .where('user_id', query.user_id)
+      .where('user_id', query._user_id).orderBy('id', 'desc')
+    } else if (query.shop_name) {
+      data = await Order.query()
+      .where('shop_name', 'LIKE', '%'+ query.shop_name +'%').orderBy('id', 'desc').paginate(query.current_page, 10)
     } else {
-      var orders = await Order.all()
-      data = orders.map((order) => order.toJSON())
+      data = await Order.query().orderBy('id', 'desc').paginate(query.current_page, 10)
     }
     return {
       code: '1',
       massage: '成功',
-      data: {
-        page: 1,
-        pageSize: 10,
-        total: 10,
-        row: data
-      }
+      data: data
     }
   }
 
   async create ({ request, response }) {
     var query = request.all()
-    query.order_status = '1'
-    query.order_label = '待付款' // 1待付款 2已付款
-    query.send_status = '1'
-    query.send_label = '待付款'
-    var orders = await Order.create(query)
-    return {
-      code: '1',
-      massage: '下单成功',
-      data: orders
-      // data: orders.map((order) => order.toJSON())
+    var obj = {
+      'user_id': query.user_id,
+      'user_name': query.user_name,
+      'user_address_id': query.user_address_id,
+      'user_address_name': query.user_address_name,
+      'shop_id': query.shop_id,
+      'shop_name': query.shop_name,
+      'shop_address_name': query.shop_address_name,
+      'shop_address_id': query.shop_address_id,
+      'shop_number': query.shop_number,
+      'shop_price': query.shop_price,
+      'shop_price_total': query.shop_price_total,
+      'shop_img_path': query.shop_img_path,
+      'order_status': '1',
+      'order_label': '待付款', // 1待付款 2已付款
+      'send_status': '1',
+      'send_label': '待付款', // 1待付款  2待发货 3待收货 4完成订单
     }
+    var orders = await Order.create(obj)
+    var obj = {
+      code: '1',
+      massage: '创建订单成功',
+      data: orders
+    }
+    request.obj = obj
+    request.login_type = query.login_type
+    request.user_name = query.user_name
+    request.user_id = query.user_id
+    return obj
   }
 
   async pay ({ request, response }) {
@@ -66,32 +80,82 @@ export default class OrdersController {
           .query()
           .where('id', query.id)
           .update({ order_status: '2', order_label: '已付款', send_status: '2', send_label: '待发货' })
-        return {
-            code: "1",
-            massage: '支付成功'
-          }
+        var obj = {
+          code: '1',
+          massage: '支付成功'
+        }
+        request.obj = obj
+        request.login_type = query.login_type
+        request.user_name = query.user_name
+        request.user_id = query.user_id
+        return obj
+
       } else {
-        return {
-          code: "1",
+        var obj = {
+          code: '1',
           massage: '用户余额不足'
         }
+        request.obj = obj
+        request.login_type = query.login_type
+        request.user_name = query.user_name
+        request.user_id = query.user_id
+        return obj
       }
     } else {
-      return {
-        code: "1",
+      var obj = {
+        code: '1',
         massage: '商品库存不足'
       }
+      request.obj = obj
+      request.login_type = query.login_type
+      request.user_name = query.user_name
+      request.user_id = query.user_id
+      return obj
     }
-    User.query().where('id', 1).update({ last_login_at: new Date() })
-
-
-
-
-    return {
+    var obj = {
       code: '1',
-      massage: '下单成功',
-      // data: orders
-      // data: orders.map((order) => order.toJSON())
+      massage: '下单成功'
+    }
+    request.obj = obj
+    request.login_type = query.login_type
+    request.user_name = query.user_name
+    request.user_id = query.user_id
+    return obj
+  }
+
+  async update ({ request, response }) {
+    var query = request.all()
+    var order = await Order.findBy('id', query.id)
+    if (query.send_status === '2') {
+      var data = await Order
+        .query()
+        .where('id', query.id)
+        .update({ send_status: '3', send_label: '待收货' })
+      var obj = {
+        code: '1',
+        massage: '状态更新成功,待发货->待收货',
+        data: data
+      }
+      request.obj = obj
+      request.login_type = query.login_type
+      request.user_name = query.user_name
+      request.user_id = query.user_id
+      return obj
+    } else if (query.send_status === '3') {
+      var data = await Order
+        .query()
+        .where('id', query.id)
+        .update({ send_status: '4', send_label: '订单完成' })
+      var obj = {
+        code: '1',
+        massage: '状态更新成功,待收货->订单完成',
+        data: data
+      }
+      request.obj = obj
+      request.login_type = query.login_type
+      request.user_name = query.user_name
+      request.user_id = query.user_id
+      return obj
     }
   }
 }

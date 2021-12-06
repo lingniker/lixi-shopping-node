@@ -1,7 +1,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.get('/shop', "ShopsController.getList")
-Route.post('/shop', "ShopsController.getList");
+Route.get('/shop', "ShopsController.getList").middleware("OperLog");
+Route.post('/shop', "ShopsController.getList").middleware("OperLog");
 
-Route.post('/shop/create', "ShopsController.create");
-Route.post('/shop/update', "ShopsController.update");
+Route.post('/shop/create', "ShopsController.create").middleware("OperLog");
+Route.post('/shop/update', "ShopsController.update").middleware("OperLog");

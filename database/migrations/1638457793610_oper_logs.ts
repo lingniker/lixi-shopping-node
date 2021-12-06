@@ -17,7 +17,7 @@ export default class OperLogs extends BaseSchema {
       table.string('login_type', 180).notNullable()
       table.string('browser_type', 80).notNullable()
       table.string('system', 80).notNullable()
-      table.string('query', 180).notNullable()
+      table.string('query', 1800).notNullable()
       table.string('response', 2080).notNullable()
 
       table.timestamp('created_at', { useTz: true })
