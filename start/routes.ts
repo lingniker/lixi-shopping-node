@@ -40,4 +40,4 @@ Route.get('/', async () => {
   return await Database.from('users').select('*')
 })
 
-Route.get('/api', "loginController.user")
+Route.get('/api', "LoginController.user")
