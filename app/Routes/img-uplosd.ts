@@ -7,5 +7,5 @@ Route.post('/api/img-upload', async ({ request }) => {
   if (coverImage) {
     await coverImage.moveToDisk('./')
   }
-  return { name: coverImage}
+  return { name: coverImage }
 })
