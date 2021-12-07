@@ -3,12 +3,6 @@
 import User from 'App/Models/User'
 export default class UsersController {
   async getList ({ request, response }) {
-    // var users = await User.all()
-    // return {
-    //   code: '1',
-    //   massage: '成功',
-    //   data: users.map((user) => user.toJSON())
-    // }
     var query = request.all()
     var users = null;
     if (query._user_name) {

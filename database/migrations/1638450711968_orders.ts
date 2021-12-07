@@ -16,6 +16,7 @@ export default class Orders extends BaseSchema {
       table.string('user_address_name', 80).notNullable()
       table.string('shop_id', 80).notNullable()
       table.string('shop_name', 80).notNullable()
+      table.string('shop_img_path', 80).notNullable()
       table.string('shop_address_name', 80).notNullable()
       table.string('shop_address_id', 80).notNullable()
       table.string('shop_number', 80).notNullable()

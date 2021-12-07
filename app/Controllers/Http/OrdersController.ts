@@ -80,16 +80,17 @@ export default class OrdersController {
           .query()
           .where('id', query.id)
           .update({ order_status: '2', order_label: '已付款', send_status: '2', send_label: '待发货' })
+        user.money = userMoney
         var obj = {
           code: '1',
-          massage: '支付成功'
+          massage: '支付成功',
+          data: user
         }
         request.obj = obj
         request.login_type = query.login_type
         request.user_name = query.user_name
         request.user_id = query.user_id
         return obj
-
       } else {
         var obj = {
           code: '1',
