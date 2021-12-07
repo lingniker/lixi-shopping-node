@@ -8,10 +8,10 @@ export default class OperLogsController {
     var operLogs = null;
     var total = 0;
     if (query._user_name) {
-      operLogs = await OperLog.query().where('user_name', 'LIKE', '%'+query._user_name+'%').orderBy('id', 'asc').paginate(query.current_page, 10)
+      operLogs = await OperLog.query().where('user_name', 'LIKE', '%'+query._user_name+'%').orderBy('id', 'desc').paginate(query.current_page, 10)
       total = operLogs.length;
     } else {
-      operLogs = await OperLog.query().orderBy('id', 'asc').paginate(query.current_page ? query.current_page : 1, 10)
+      operLogs = await OperLog.query().orderBy('id', 'desc').paginate(query.current_page ? query.current_page : 1, 10)
     }
     var obj = {
       code: '1',
