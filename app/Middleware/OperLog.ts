@@ -18,7 +18,7 @@ export default class OperLog {
     obj.ip = requestJosn.ip
     obj.browser_type = utils.getBrowserType(requestJosn.headers['user-agent'])
     obj.system = utils.getSystem(requestJosn.headers['user-agent'])
-    obj.query = query
+    obj.query = query ? query : '--'
 
     obj.response = request.user_name
     await OperLog.create(obj)
