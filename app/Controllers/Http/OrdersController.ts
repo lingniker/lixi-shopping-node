@@ -75,7 +75,7 @@ export default class OrdersController {
         await Shop
           .query()
           .where('id', query.shop_id)
-          .update({ stock: shop_number, sales_volume: parseInt(shop.sales_volume) + query.shop_number })
+          .update({ stock: shop_number, sales_volume: parseInt(shop.sales_volume) + parseInt(query.shop_number) })
         await Order
           .query()
           .where('id', query.id)
