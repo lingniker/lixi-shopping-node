@@ -1,9 +1,10 @@
+import { ApplicationContract } from '@ioc:Adonis/Core/Application'
 class logistic {
-  constructor(){
+  constructor(protected app: ApplicationContract){
     this.state = 1
   }
   async post(){
-    console.log('Logistic 创建事务成功')
+    console.log('Logistic 创建事务成功') // this.app.databaseTrx
     this.state = 2
     return {
       code: '1',
@@ -12,8 +13,9 @@ class logistic {
   }
   async commit () {
     this.state = 3
-    console.log('commit 创建事务成功')
+    // console.log('commit 创建事务成功')
     // massage: '创建事务成功'
+    console.log('commit 创建事务成功')
     return {
       code: '1',
       massage: '提交成功'

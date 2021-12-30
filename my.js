@@ -400,3 +400,226 @@ var a = {
   "ip":"127.0.0.1",
   "subdomains":{}
 }
+
+
+var a = {
+  'Adonis/Core/Application': {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      appRoot: 'E:\\myCode\\lixi-shopping\\lixi-shopping-node',
+      environment: 'web',
+      helpers: [Object],
+      providersWithReadyHook: [Array],
+      providersWithShutdownHook: [Array],
+      state: 'booted',
+      cliCwd: 'E:\\myCode\\lixi-shopping\\lixi-shopping-node',
+      isShuttingDown: false,
+      nodeEnvironment: 'development',
+      preloads: [Array],
+      directoriesMap: [Map],
+      aliasesMap: [Map],
+      namespacesMap: [Map],
+      container: [Ioc],
+      rcFile: [Object],
+      typescript: true,
+      appName: 'lixi-shopping-node',
+      version: [Object],
+      adonisVersion: [Object],
+      exceptionHandlerNamespace: 'App/Exceptions/Handler',
+      env: [Env],
+      config: [Config],
+      logger: [Logger],
+      profiler: [Profiler],
+      registrar: [Registrar]
+    }
+  },
+  'Adonis/Core/Helpers': { callback: [Function (anonymous)], singleton: false },
+  'Adonis/Core/Env': {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      valuesToProcess: [],
+      hasProcessedValues: true,
+      envCache: [Object],
+      validationSchema: [Object],
+      schema: [Object]
+    }
+  },
+  'Adonis/Core/Config' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: { config: [Object] }
+  },
+  'Adonis/Core/Logger': {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: { config: [Object], pino: [EventEmitter] }
+  },
+  'Adonis/Core/Profiler' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      appRoot: 'E:\\myCode\\lixi-shopping\\lixi-shopping-node',
+      logger: [Logger],
+      config: [Object]
+    }
+  },
+  'Adonis/Core/HttpExceptionHandler' : { callback: [Function (anonymous)], singleton: false },
+  'Adonis/Core/HealthCheck' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      application: [Application],
+      healthCheckers: [Object],
+      resolver: [IocResolver]
+    }
+  },
+  'Adonis/Core/AssetsManager' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue:{
+      config: {},
+      application: [Application],
+      drivers: [Object],
+      booted: false
+    }
+  },
+  'Adonis/Core/Encryption' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      options: [Object],
+      separator: '.',
+      base64:  {},
+      algorithm: 'aes-256-cbc',
+      cryptoKey: '',
+      verifier: [MessageVerifier]
+    }
+  },
+  'Adonis/Core/Event' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      transport: [Emittery],
+      trappingEvents: false,
+      traps: {},
+      iocResolver: [IocResolver]
+    }
+  },
+  'Adonis/Core/Drive' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      application: [Application],
+      mappingsCache: [Map],
+      driverCreatorNames: [Map],
+      extendedDrivers: {},
+      router: [Router],
+      logger: [Logger],
+      config: [Object],
+      isReady: true,
+      fakeCallback: [Function (anonymous)],
+      singleton: true,
+      fakes: {}
+    }
+  },
+  'Adonis/Core/Hash' : { callback: [Function (anonymous)], singleton: true },
+  'Adonis/Core/Request' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: { macros: [Object], getters: {} }
+  },
+  'Adonis/Core/Response' : { callback: [Function (anonymous)], singleton: true },
+  'Adonis/Core/MiddlewareStore' : { callback: [Function (anonymous)], singleton: false },
+  'Adonis/Core/Server' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      application: [Application],
+      encryption: [Encryption],
+      httpConfig: [Object],
+      middleware: [MiddlewareStore],
+      router: [Router],
+      hooks: [Hooks],
+      precompiler: [PreCompiler],
+      exception: [ExceptionManager],
+      requestHandler: [RequestHandler]
+    }
+  },
+  'Adonis/Core/HttpContext' : { callback: [Function (anonymous)], singleton: false },
+  'Adonis/Core/Route' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      encryption: [Encryption],
+      routeProcessor: [Function (anonymous)],
+      routes: [Array],
+      BriskRoute: [Function],
+      RouteGroup: [Function],
+      RouteResource: [Function],
+      Route: [Function],
+      RouteMatchers: [Function],
+      matchers: {},
+      paramMatchers: {},
+      lookupStore: [LookupStore],
+      store: [Store],
+      openedGroups: []
+    }
+  },
+  'Adonis/Core/CookieClient' : { callback: [Function (anonymous)], singleton: true },
+  'Adonis/Core/BodyParser' : { callback: [Function (anonymous)], singleton: false },
+  'Adonis/Core/Validator' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      ValidationException: [class ValidationException extends Exception],
+      validator: [Object],
+      schema: [Object],
+      rules: [Object]
+    }
+  },
+  'Adonis/Lucid/Database' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      config: [Object],
+      logger: [Logger],
+      profiler: [Profiler],
+      emitter: [Emitter],
+      Database: [Function],
+      manager: [ConnectionManager],
+      primaryConnectionName: 'mysql',
+      DatabaseQueryBuilder: [Function],
+      InsertQueryBuilder: [Function],
+      ModelQueryBuilder: [Function],
+      SimplePaginator: [Function],
+      connectionGlobalTransactions: {},
+      hasHealthChecksEnabled: false,
+      prettyPrint: [Function]
+    }
+  },
+  'Adonis/Lucid/Orm' : { callback: [Function (anonymous)], singleton: true },
+  'Adonis/Lucid/Schema' : { callback: [Function (anonymous)], singleton: true },
+  'Adonis/Lucid/Factory' : { callback: [Function (anonymous)], singleton: true },
+  'Adonis/Lucid/Seeder' : { callback: [Function (anonymous)], singleton: true },
+  'Adonis/Lucid/Migrator' : { callback: [Function (anonymous)], singleton: false },
+  'Adonis/Core/View' : {
+    callback: [Function (anonymous)],
+    singleton: true,
+    cachedValue: {
+      options: [Object],
+      executedPlugins: false,
+      compilerOptions: [Object],
+      asyncCompilerOptions: [Object],
+      plugins: [Array],
+      processor: [Processor],
+      GLOBALS: [Object],
+      tags: [Object],
+      loader: [Loader],
+      compiler: [Compiler],
+      asyncCompiler: [Compiler]
+    }
+  },
+  'Adonis/Logistic' : { callback: [Function (anonymous)], singleton: false }
+}

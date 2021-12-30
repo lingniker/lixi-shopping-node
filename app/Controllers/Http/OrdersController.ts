@@ -4,6 +4,7 @@ import Order from 'App/Models/Order'
 import User from 'App/Models/User'
 import Shop from 'App/Models/Shop'
 import Database from '@ioc:Adonis/Lucid/Database'
+import Application from '@ioc:Adonis/Core/Application'
 
 import Logistic from '@ioc:Adonis/Logistic'; // 物流
 
@@ -11,6 +12,7 @@ export default class OrdersController {
   async getList ({ request, response }) {
     var query = request.all()
     var data = []
+    // console.log('Application.abcd---->', Application.abcd)
     if (query._user_id) {
       data = await Order.query()
       .where('user_id', query._user_id).orderBy('id', 'desc').paginate(1, 100)
@@ -66,8 +68,8 @@ export default class OrdersController {
     var user = await User.findBy('id', query.user_id)
     var order = await Order.findBy('id', query.id)
     var shop = await Shop.findBy('id', query.shop_id)
-    const trx = await Database.transaction() // 创建事务
-    const LogisticTrx = new Logistic(order);
+    var trx = 'databaseTrx' + query.user_id + query.id + new Date().getTime()
+    Application[trx] = await Database.transaction() // 创建事务
 
     var shop_number = shop.stock - query.shop_number
     if (shop_number >= 0) { // 判断商品数量是否充足
@@ -75,44 +77,59 @@ export default class OrdersController {
       if (userMoney >= 0) { // 判断用户余额是否充足
         try {
           await User
-            .query({ client: trx })
+            .query({ client: Application[trx] })
             .where('id', query.user_id)
             .update({ money: userMoney })
           await Shop
-            .query({ client: trx })
+            .query({ client: Application[trx] })
             .where('id', query.shop_id)
             .update({ stock: shop_number, sales_volume: parseInt(shop.sales_volume) + parseInt(query.shop_number) })
           await Order
-            .query({ client: trx })
+            .query({ client: Application[trx] })
             .where('id', query.id)
             .update({ order_status: '2', order_label: '已付款', send_status: '2', send_label: '待发货' })
-          await LogisticTrx.post() // 创建物流事务
-          if (LogisticTrx.state === 2) { // 物流事务创建正常
-            await LogisticTrx.commit() // 物流系统事务提交
-            if (LogisticTrx.state === 3) { // 物流事务创建状态正常
-              await trx.commit() // 事务提交
-            } else {
-              await trx.rollback() // 订单事务回滚
+          await Logistic.post() // 创建物流事务
+          if (Logistic.state === 2) { // 物流事务创建状态正常
+            await Application[trx].commit() // 事务提交
+            user.money = userMoney
+            var obj = {
+              code: '1',
+              massage: '支付成功',
+              data: user
             }
+            request.obj = obj
+            request.login_type = query.login_type
+            request.user_name = query.user_name
+            request.user_id = query.user_id
+            return obj
           } else {
-            await trx.rollback() // 订单事务回滚
+            await Application[trx].rollback() // 订单事务回滚
+            user.money = userMoney
+            var obj = {
+              code: '1',
+              massage: '支付失败',
+              data: user
+            }
+            request.obj = obj
+            request.login_type = query.login_type
+            request.user_name = query.user_name
+            request.user_id = query.user_id
+            return obj
           }
         } catch (error) {
-          await trx.rollback() // 订单事务回滚
-          await LogisticTrx.rollback()
+          await Application.databaseTrx.rollback() // 订单事务回滚
+          user.money = userMoney
+          var obj = {
+            code: '1',
+            massage: '支付失败',
+            data: user
+          }
+          request.obj = obj
+          request.login_type = query.login_type
+          request.user_name = query.user_name
+          request.user_id = query.user_id
+          return obj
         }
-
-        user.money = userMoney
-        var obj = {
-          code: '1',
-          massage: '支付成功',
-          data: user
-        }
-        request.obj = obj
-        request.login_type = query.login_type
-        request.user_name = query.user_name
-        request.user_id = query.user_id
-        return obj
       } else {
         var obj = {
           code: '1',

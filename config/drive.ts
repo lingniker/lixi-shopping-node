@@ -54,7 +54,7 @@ const driveConfig: DriveConfig = {
       | files.
       |
       */
-      root: path.join(__dirname,'../public/img')
+      root: path.join(__dirname,'../public/img'),
 
       /*
       |--------------------------------------------------------------------------
