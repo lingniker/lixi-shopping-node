@@ -8,6 +8,8 @@ import Application from '@ioc:Adonis/Core/Application'
 
 import Logistic from '@ioc:Adonis/Logistic'; // 物流
 
+import Transaction from "../../../utils/Transaction";
+
 export default class OrdersController {
   async getList ({ request, response }) {
     var query = request.all()
@@ -69,6 +71,29 @@ export default class OrdersController {
     var order = await Order.findBy('id', query.id)
     var shop = await Shop.findBy('id', query.shop_id)
     var trx = 'databaseTrx' + query.user_id + query.id + new Date().getTime()
+
+    // var Transaction = new Transaction(order , Logistic);
+    // Transaction.prepare(); // 事务的准备阶段
+    // if (Transaction.state === '2') { // 事务已经准备好
+    //   Transaction.commit() // 事务准备提交
+    //   if (Transaction.state === '4') {
+    //    console.log('事务提交成功')
+    //   }
+    // } else {
+    //   Transaction.rollback() // 事务回滚
+    // }
+    
+    // class order = {
+    //   constructor (app) {
+    //     this.state = '0'
+    //   }
+    //   public prepare () {
+
+    //   }
+    //   public commit () {}
+    //   public rollback () {}
+    // }
+
     Application[trx] = await Database.transaction() // 创建事务
 
     var shop_number = shop.stock - query.shop_number
