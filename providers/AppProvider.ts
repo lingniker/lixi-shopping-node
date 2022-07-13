@@ -17,6 +17,9 @@ export default class AppProvider {
   public async ready () {    
     // App is ready
     console.log('AppProvider AppProvider AppProvider----------#### ready')
+    if (this.app.environment === 'web') {
+      await import('../start/socket')
+    }
   }
 
   public async shutdown () {
