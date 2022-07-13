@@ -28,7 +28,7 @@ export default class LogisticProvider {
     // console.log('LogisticProvider LogisticProvider LogisticProvider----------#### register')
     this.app.container.bind('Adonis/Logistic', (app) => {
       const Logistic = require('./Logistic')
-      return new Logistic(this.app);
+      return {};
     })
   }
 

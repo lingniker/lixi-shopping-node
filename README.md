@@ -10,6 +10,19 @@
   npm run dev
 ```
 
+###  特别注意 使用的是 npm 源， 不是阿里
+
+```sh
+  ## 查看源
+  npm config get registry 
+  
+  ### 设置淘宝源
+  npm config set registry  https://registry.npm.taobao.org 
+
+  ### 使用的是npm源
+  npm config set registry http://registry.npmjs.org
+```
+
 ### 1.数据库的连接
 
 ```sh
