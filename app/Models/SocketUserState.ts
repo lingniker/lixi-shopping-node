@@ -5,6 +5,18 @@ export default class SocketUserState extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public session_id: string
+
+  @column()
+  public socket_id: string
+
+  @column()
+  public is_online: string
+
+  @column()
+  public invalid: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

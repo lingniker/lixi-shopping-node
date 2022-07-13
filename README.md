@@ -81,8 +81,8 @@ MYSQL_DB_NAME=shopping // 连接数据库
 
 ### 4.数据模型
 ```sh
-  ## 创建数库模型 
-  node ace make:model -m <name>
+  ## 创建数库模型 并创建 迁移模型 
+  node ace make:model <name> -m 
 ```
 
 ### 5.控制器与数据库

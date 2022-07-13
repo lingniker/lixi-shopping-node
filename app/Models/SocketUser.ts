@@ -5,6 +5,21 @@ export default class SocketUser extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public socket_nick: string
+
+  @column()
+  public socket_avatar: string
+
+  @column()
+  public level: string
+
+  @column()
+  public time: string
+
+  @column()
+  public ban: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

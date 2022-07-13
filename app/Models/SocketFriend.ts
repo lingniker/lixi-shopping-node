@@ -5,6 +5,21 @@ export default class SocketFriend extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
+  @column()
+  public friend_1: string
+
+  @column()
+  public friend_2: string
+
+  @column()
+  public black: string
+
+  @column()
+  public blacklisted: string
+
+  @column()
+  public contact: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
