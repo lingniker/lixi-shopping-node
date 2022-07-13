@@ -43,7 +43,6 @@ Ws.io.on('connection', (socket) => {
   })
 
   socket.on('getMsgs', (data) => {
-    // console.log('obj-', obj)
     socket.emit('getMsgsFeedback', [data])
   })
 
