@@ -9,7 +9,7 @@ var socketMap = {}
  */
 Ws.io.on('connection', (socket) => {
   socket.on('login', (data) => {
-    socket.emit('loginFeedback', {
+    socket.emit('loginFb', {
       code: 200, 
       msg: '登录成功',
       friends: [
@@ -38,12 +38,22 @@ Ws.io.on('connection', (socket) => {
       text: data.text,
       unread: '1',
     }
+    var fbObj = {
+      from: data.from,
+      to: data.to,
+      type: 'text',
+      text: data.text,
+      unread: '1',
+      flow: 'out'
+    }
     // console.log('obj-', obj)
+    socket.emit('saytoFb', fbObj)
     SocketsController.saveChat(obj)
   })
 
-  socket.on('getMsgs', (data) => {
-    socket.emit('getMsgsFeedback', [data])
+  socket.on('getMsgs', async(data) => {
+    var res = await SocketsController.getMsgs()
+    socket.emit('getMsgsFb', res)
   })
 
 })
