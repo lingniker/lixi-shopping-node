@@ -18,7 +18,7 @@ class SocketsController {
 
   async getMsgs(query) {
     // await SocketChat.create(data)
-    console.log('query', query)
+    // console.log('query', query)
     var newData = await SocketChat.query().whereIn('from', [query.from, query.to]).andWhereIn('to', [query.from, query.to]);
     var data = newData.map((item) => item.toJSON())
     for(var i = 0; i < data.length; i++) {
@@ -32,11 +32,27 @@ class SocketsController {
   }
   async getFriend(data) {
     // console.log(data)
-    return await SocketFriend.query().where('friend_1', data.account);
+    var friendsArr =  await SocketFriend.query().where('friend_1', data.account);
+    var arr = friendsArr.map(item => item.toJSON())
+    for (var i = 0; i < arr.length; i++) {
+      var socket_user = await SocketUser.findBy('id', arr[i].friend_2)
+      var orderJson = socket_user.toJSON()
+
+      var query = {
+        from: arr[i].friend_1,
+        to: arr[i].friend_2
+      }
+      var msgs = await this.getMsgs(query);
+      var lastMsg =  msgs[msgs.length - 1]
+      arr[i].lastMsg = lastMsg
+
+      arr[i] = Object.assign({}, arr[i], orderJson)
+    }
+    return arr;
   }
 
   async addFriend(data) {
-    var res = await SocketFriend.query().where('friend_1', data.friend_1).andWhere('friend_2',data.friend_2);
+    var res = await SocketFriend.query().where('friend_1', data.friend_1).andWhere('friend_2', data.friend_2);
     if (res.length) {
       return;
     } else {
