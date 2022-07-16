@@ -4,12 +4,21 @@ import SocketsController from 'App/Services/socket'
 Ws.boot()
 
 var socketMap = {}
+
+
+setInterval(async()=>{
+  await SocketsController.findUser('1')
+  console.log('四分钟更新一次试试看, 这里有点坑，暂时先这样处理');
+}, 4 * 60 * 1000)
+
 /**
  * Listen for incoming socket connections
  */
 Ws.io.on('connection', (socket) => {
   socket.on('login', async(data) => {
+    console.log('登录')
     var res = await SocketsController.findUser(data.account);
+    console.log('数据库连接有错吗')
     if (res.length) {
       socket['account'] = data.account;
       socketMap[socket.id] = socket;
@@ -18,21 +27,7 @@ Ws.io.on('connection', (socket) => {
         msg: '登录成功',
         socket_id: data.account + "_" + socket.id,
         account : data.account,
-        friends: [
-          {
-            socket_nick: 'nick2',
-            socket_avatar: 'https://img1.baidu.com/it/u=2410334281,3176912851&fm=253&fmt=auto&app=138&f=JPEG?w=511&h=500',
-            unread: '0',
-            time: 1231,
-            lastMsg: {
-              from: '2',
-              to: '1',
-              time: 1231,
-              type: 'text',
-              text: '123456'
-            }
-          }
-        ]
+        data: res[0]
       })
     } else {
       socket.emit('loginFb', {
@@ -72,9 +67,9 @@ Ws.io.on('connection', (socket) => {
   })
 
   socket.on('getMsgs', async(data) => {
-    console.log("data----------------->", data, socket.account)
+    console.log("data----------------->", data.from, data.account)
     var query = {
-      from: socket['account'],
+      from: data.from,
       to: data.account
     }
     var res = await SocketsController.getMsgs(query)
@@ -82,6 +77,7 @@ Ws.io.on('connection', (socket) => {
   })
 
   socket.on('getFriends', async(data)=>{
+    console.log('获取朋友')
     var res = await SocketsController.getFriend(data)
     socket.emit('getFriendsFb', res)
   })
