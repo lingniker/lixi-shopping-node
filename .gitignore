@@ -8,4 +8,6 @@ tmp
 
 public/img/*
 
+public
+
 !.gitkeep
