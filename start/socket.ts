@@ -1,5 +1,5 @@
 import Ws from 'App/Services/Ws'
-import SocketsController from 'App/Services/socket'
+import SocketsController from 'App/Services/Socket'
 
 Ws.boot()
 
